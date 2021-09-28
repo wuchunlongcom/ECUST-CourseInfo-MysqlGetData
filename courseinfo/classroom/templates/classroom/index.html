@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <br><br><br><br>   
+    <div class="col-md-1 column"></div>
+    <div class="col-md-12 column">
+        <div class="jumbotron"> 
+            <div class="text-center" ><h3>{% trans 'ECUST Course Search System' %}<h3></div>
+            <a href='/courseinfo' class="btn btn-lg btn-danger btn-block" >{% trans 'Course Search' %}</a>
+            <br/><br/>  
+            <a href='/classroominfo' class="btn btn-lg btn-danger btn-block" >{% trans 'Classroom Search' %}</a>
+            <br/><br/>        
+        </div>        
+    </div>
+</div>
+{% endblock %}

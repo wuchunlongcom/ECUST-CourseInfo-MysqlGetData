@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <br>
+    <div class="col-md-12 column">
+        <div class="jumbotron" >
+            <div class="col-md-offset-4" span style="color:#f00">                                   
+             {% for d in courses %}
+              <h5>               
+                   课程名称：{{ d.name }} <br><br>
+                   上课时节：第{{d.KS}} ~ {{d.JS}}节<br><br>
+                   教室名称：{{d.classroom}} <br><br>
+                   教师名称：{{ d.teacher }} <br><br>
+                   课程安排：{{ d.START_TIME }} <br><br>
+              </h5>                
+              {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a>
+    </div><br><br><br>
+
+</div>
+{% endblock %}

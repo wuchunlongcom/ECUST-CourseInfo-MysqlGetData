@@ -1,0 +1,2 @@
+*/1 * * * * python /home/www/ecustCourseInfo/src/courseinfo/syncdb.py
+*/1 * * * * /bin/bash /home/www/ecustCourseInfo/src/courseinfo/data/checksyncdb.sh

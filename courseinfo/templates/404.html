@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a> 
+    </div><br><br><br>
+ 
+    <div class="col-md-12 column">
+        <div class="jumbotron"> 
+            <div class="text-center" ><h3>查询系统<h3></div>
+            <br/><br/>
+            您查询的学期或者其它资源不存在！
+        </div>        
+    </div>
+</div>
+{% endblock %}

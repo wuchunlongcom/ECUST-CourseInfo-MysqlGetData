@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <br>
+    <div class="col-md-12 column">
+        <div class="jumbotron"> 
+            <div class="text-center" ><h3>查询系统 -- {{campus}}<h3></div>
+            {% for b in buildings %}                 
+            <div class="col-md-3 column">
+                <a href="{{baseUrl}}/{{campus}}/{{b}}" class="btn btn-lg btn-danger btn-block">{{b}}</a>
+                <br>
+            </div>
+            <!-- {% if forloop.counter|divisibleby:3 %}
+                    <br><br><br><br>
+            {% endif %} -->
+            {% endfor %}
+            {% for d in buildings %}                 
+            <br/>
+            {% endfor %}
+        </div>        
+    </div>
+    <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a>
+    </div><br><br><br>
+</div>
+{% endblock %}

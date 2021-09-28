@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <br>
+    <div class="col-md-12 column">
+        <div class="jumbotron">            
+            <div class="text-center">
+                <h3> {{ campus }} -- {{ building }} -- {{classroom}} -- 教室课程安排表</h3>
+                {{ date.year }}/{{ date.month }}/{{ date.day }} -- 第 {{week}} 周 -- 星期 {{ weekday }}
+                <br><br>
+                <div class="col-md-12 column">
+                    <form class="form-horizontal" role="form" action="" method="get">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-3">
+                            <input type="date" name="date" value="{{ date.isoformat }}" autofocus >
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-success" value="">查询</button>
+                        </div>
+                    </form>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>               
+                    <th>课节</th>                   
+                    <th>课程名称</th>
+                    <th>教师名称</th>           
+                </tr>
+            </thead>
+            <tbody>       
+                {% for d in mlist %}
+                    <tr>
+                        <td>{{ d.j}}</td>
+
+                        {% if d.KCMC %}  
+                            <td><a href='/courseinfo/{{d.id}}/'><i class="fa fa-university" aria-hidden="true">{{ d.KCMC }}</i></a> </td> 
+                        {% else %} 
+                            <td></td> 
+                        {% endif %}
+                        <td>{{ d.TEACHER_NAME}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a>
+    </div><br><br><br>
+
+</div>
+
+{% endblock %}

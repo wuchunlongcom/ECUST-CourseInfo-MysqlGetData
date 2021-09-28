@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block body %}   
+{% load i18n %}    
+<div class="container theme-showcase" role="main">
+    <br>
+    <div class="col-md-12 column">
+        <div class="jumbotron"> 
+            <div class="text-center" ><h3>{{campus}} -- {{building}} -- 教室列表 <h3></div> 
+            {% for d in classrooms %}                 
+                <div class="col-md-3 column">
+                    <a href='{{baseUrl}}/{{campus}}/{{building}}/{{d}}' class="btn btn-lg btn-danger btn-block">{{d}}</a>
+                    <br/>
+                </div>
+            {% endfor %}
+            {% for d in classrooms %}                 
+            <br/>
+            {% endfor %}
+        </div>        
+    </div>
+    <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a>
+    </div><br><br><br>
+
+</div>
+{% endblock %}

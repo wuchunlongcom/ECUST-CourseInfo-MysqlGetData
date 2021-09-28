@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <br>
+    <div class="jumbotron">   
+    <form method="get" action="">
+        <div class="col-md-12 column">
+            <div class="input-group">
+                <span class="input-group-addon">按课程名称查</span>
+                <input type="text" class="form-control" placeholder="按课程名称查" name="coursename" value="" autofocus />
+                </input>
+            </div>            
+        </div>        
+
+        <br><br>
+
+        <button class="btn btn-lg btn-danger btn-block" type="submit">查询</button>            
+    </form>
+
+</div>
+
+    <div class="jumbotron">
+
+        {% include 'home/djangopage.html' %}  
+        <br><br>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                
+                <th>序号</th>
+                <th>课程名称</th>
+                <th>教师姓名</th>               
+                <th>教室名称</th>
+                <th>星期</th>
+                <th>课节</th>              
+                <th>课程安排</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+            {% for d in data_list %}
+                <tr>
+                    
+                    <td>{{ forloop.counter | add:offset }}</td>
+                    <td>{{ d.name }}</td>
+                    <td>{{ d.teacher }}</td>
+                    
+                    <td>{{ d.classroom}}</td>
+                    <td>{{ d.XQ}}</td>
+                    <td>{{ d.KS}} - {{ d.JS}} 节</td>
+                    <td>{{ d.START_TIME }}</td>
+                   
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a>
+    </div><br>
+</div>
+{% endblock %}

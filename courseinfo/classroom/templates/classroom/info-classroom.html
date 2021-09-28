@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <br>
+    <div class="col-md-12 column text-center">
+    <div class="jumbotron">
+        <h3> {% trans 'Classroom Search' %} -- {{ campus }} -- {{ building }} </h3>
+        {{ date.year }}/{{ date.month }}/{{ date.day }} -- 第 {{week}} 周 -- 星期 {{ weekday }}
+        <br><br>
+        <div class="col-md-12 column">
+                <form class="form-horizontal" role="form" action="" method="get">
+                    <!-- {% csrf_token %} -->
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <input type="date" name="date" value="{{ date.isoformat }}" autofocus >
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-success" value="">查询</button>
+                    </div>
+                </form>
+            <br><br>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <!-- <thead>
+            <tr>
+                <th>名称</th>
+                <th>01</th>
+                <th>02</th>
+                <th>03</th>
+                <th>04</th>
+                <th>05</th>
+                <th>06</th>
+                <th>07</th>
+                <th>08</th>
+                <th>09</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+            </tr>
+            </thead> -->
+            <tbody>
+            {% for class in classroomList %}
+                <tr>
+                    <td></td>
+                    <td>上午</td>
+                    {% for i in class.1.0 %}
+                    {% if i.1 %}
+                    <td><div style="background:#3ACC3A;">{{ i.0 }}</div></td>
+                    {% else %}
+                    <td><div style="background:#FFFFFF;">{{ i.0 }}</div></td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>{{ class.0.name }}</td>
+                    <td>下午</td>
+                    {% for i in class.1.1 %}
+                    {% if i.1 %}
+                    <td><div style="background:#3ACC3A;">{{ i.0 }}</div></td>
+                    {% else %}
+                    <td><div style="background:#FFFFFF;">{{ i.0 }}</div></td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>晚上</td>
+                    {% for i in class.1.2 %}
+                    {% if i.1 %}
+                    <td><div style="background:#3ACC3A;">{{ i.0 }}</div></td>
+                    {% else %}
+                    <td><div style="background:#FFFFFF;">{{ i.0 }}</div></td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    {% for i in class.1.0 %}
+                    <td></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+        <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a>
+    </div><br><br><br>
+
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+{% load i18n %}
+<div class="container theme-showcase" role="main">
+    <br>
+    <div class="col-md-12 column">
+        <div class="jumbotron"> 
+            <div>
+                {% if syncingdb %}
+                <span style="color:#f00;display:inline">数据更新中，请稍等... </span> &nbsp;&nbsp;&nbsp;&nbsp;
+                {% else %}
+                <form action="/syncdb/" method="POST" style="display:inline">
+                    {% csrf_token %}   
+                     <button class="btn btn-lg btn-danger btn-block" type="submit">同步数据库</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>        
+    </div>
+    <div class="col-md-12 column">
+        <a href='/' class="btn btn-lg btn-success btn-block">{% trans 'Return' %}</a>
+    </div><br><br><br>
+</div>
+{% endblock %}

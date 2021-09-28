@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-21 14:14+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: classroom/templates/classroom/index.html:9
+msgid "ECUST Course Search System"
+msgstr "华东理工-课程管理查询系统"
+
+#: classroom/templates/classroom/index.html:10
+#: classroom/templates/classroom/info-course.html:8
+msgid "Course Search"
+msgstr "课程查询"
+
+#: classroom/templates/classroom/index.html:12
+#: classroom/templates/classroom/info-classroom.html:8
+msgid "Classroom Search"
+msgstr "自习室查询"
+
+#: classroom/templates/classroom/info-building.html:24
+#: classroom/templates/classroom/info-campus.html:16
+#: classroom/templates/classroom/info-classroom-details.html:53
+#: classroom/templates/classroom/info-classroom-list.html:21
+#: classroom/templates/classroom/info-classroom.html:93
+#: classroom/templates/classroom/info-course-details.html:23
+#: classroom/templates/classroom/info-course.html:16
+#: classroom/templates/classroom/search-coursename.html:60
+#: classroom/templates/classroom/search-teachername.html:56
+#: classroom/templates/classroom/syncdb.html:21 templates/404.html:6
+msgid "Return"
+msgstr "返回首页"
+
+#: classroom/templates/classroom/info-course.html:9
+msgid "Search by Classroom"
+msgstr "按教室分布查"
+
+#: classroom/templates/classroom/info-course.html:10
+msgid "Search by Course"
+msgstr "按课程名称查"
+
+#: classroom/templates/classroom/info-course.html:11
+msgid "Search by Teacher"
+msgstr "按教师名称查"
+
+#: templates/base.html:13
+msgid "ECUST CourseInfo"
+msgstr "华东理工-课程信息系统"
