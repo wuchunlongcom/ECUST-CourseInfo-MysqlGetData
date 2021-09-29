@@ -31,9 +31,9 @@ class ClassroomType(models.Model):
 
 class Classroom(models.Model):
     id = models.CharField(verbose_name='教室ID', max_length=128, primary_key=True, blank=True) #16
-    building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='教室名称', max_length=16, null=True, blank=True)
-    classroomType = models.ForeignKey(ClassroomType, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    classroomType = models.ForeignKey(ClassroomType, on_delete=models.CASCADE)
     show_schedule = models.BooleanField(verbose_name='课表显示', default=True)
     show_classroom = models.BooleanField(verbose_name='自习室显示', default=True)
 

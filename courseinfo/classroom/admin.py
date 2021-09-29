@@ -11,7 +11,7 @@ class CampusAdmin(admin.ModelAdmin):
 
 @admin.register(Building)
 class BuildingAdmin(admin.ModelAdmin):
-    list_display = ('campus', 'name', 'show_schedule', 'show_classroom')
+    list_display = ('id', 'campus', 'name', 'show_schedule', 'show_classroom')
     list_editable = ['show_schedule', 'show_classroom']
 
 

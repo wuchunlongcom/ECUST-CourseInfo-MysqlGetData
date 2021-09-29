@@ -182,12 +182,6 @@ mysql> select * from classroom_term;
 
 ```
 
-### 问题
-```
-django.db.utils.IntegrityError: NOT NULL constraint failed: classroom_classroom.building_id
-解决方法    
-building = models.ForeignKey(Building, on_delete=models.CASCADE) # 增加 null=True, blank=True, default=None
-building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True, blank=True, default=None)
 
 
 2021.09.28

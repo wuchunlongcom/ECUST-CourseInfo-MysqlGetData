@@ -5,6 +5,19 @@ import django
 import datetime
 import xlrd
 
+def list_sub(list1,list2):
+    """
+    二个列表相减，序列不发生了变化
+    list1 = [[3,4],[5, 6],[1, 2],[7, 8]] 
+    list2 = [[3, 4],[7, 8]]
+    return： [[5, 6], [1, 2]]
+    """
+    mylist = []
+    for i in list1:
+        if i not in  list2 :
+            mylist .append(i) 
+    return mylist 
+
 # Oracle
 def getData(sql):
     import cx_Oracle
@@ -197,12 +210,12 @@ def syncdb_MysqlGetData():
     """
     # [[1, '商学院大楼', 1, 1, '徐汇校区'],...]
     items = getMysqlData('select * from classroom_building') 
-    building_campus = [(i[1],i[4]) for i in items]
-    items = set((i[4], i[1]) for i in items)
-    [i.delete() for i in Building.objects.all() if (i.campus.name, i.name) not in items]
-    items = items - set(Building.objects.all().values_list('campus__name', 'name'))
-    items = [Building(campus=Campus.objects.get(name=k), name=v) for (k,v) in items]
+    items = [(i[4], i[1]) for i in items]
+    [i.delete() for i in Building.objects.all() if (i.campus.name, i.name) not in items]    
+    items = list_sub(items,list(Building.objects.all().values_list('campus__name', 'name')))    
+    items = [Building(campus=Campus.objects.get(name=i[0]), name=i[1]) for i in items]
     Building.objects.bulk_create(items, batch_size=20)
+    
 
     # Import Teacher
     """
@@ -249,24 +262,27 @@ def syncdb_MysqlGetData():
     +----------------------------------+--------------+---------------+----------------+-------------+------------------+
     | id                               | name         | show_schedule | show_classroom | building_id | classroomType_id |
     +----------------------------------+--------------+---------------+----------------+-------------+------------------+
-    | 017C98D2C9454F17882C62DEAD49D204 | 实四401       |             1 |              1 |           4 | 实验室           |
+    | 017C98D2C9454F17882C62DEAD49D204 | 实四401       |             1 |              1 |          23 | 实验室           |
     ...
     | FD3FF785ADB842F4B6E96620C3099D3A | 实验六楼341    |             1 |              1 |          17 | 实验室           |
     +-------------------------------------------------+---------------+----------------+-------------+------------------+
     606 rows in set (0.00 sec)    
-    """                                                         
-    items = getMysqlData('select * from classroom_classroom') 
-    items = {i[0]:i for i in items}
-      
-    [i.delete() for i in Classroom.objects.all() if i.id not in items]
-    items = {i:items[i] for i in set(items)-set(Classroom.objects.all().values_list('id', flat=True))}
-       
-    #items =  [building_campus[v[4]-1][1] for (k,v) in items.items()]
+    """ 
+                                                            
+    classrooms = getMysqlData('select * from classroom_classroom') 
+         
+    items = {i[0]:i for i in classrooms}     
+    [i.delete() for i in Classroom.objects.all() if i.id not in items]        
+    items = list_sub(classrooms,list(Classroom.objects.all().values_list()))
+ 
     items = [Classroom(id=v[0], name=v[1], 
-                    building=Building(campus=Campus.objects.get(name=building_campus[v[4]-1][1]),
-                    name=building_campus[v[4]-1][0]), classroomType=ClassroomType.objects.get(name=v[5])) for (k,v) in items.items()]
-    
+                    building=Building.objects.get(
+                        campus=Campus.objects.get(name=Building.objects.get(id=v[4]).campus.name),
+                        name=Building.objects.get(id=v[4]).name                       
+                        ),                        
+                    classroomType=ClassroomType.objects.get(name=v[5])) for v in items]      
     Classroom.objects.bulk_create(items, batch_size=20)
+
 
     # Import Course
     """
@@ -310,8 +326,8 @@ def main():
     # print(type(schedules[0]), schedules[0:10])
     syncdb(classrooms, schedules)
 
-
+    
 if __name__ == "__main__":
     #main()  # 关闭从Oracle数据库获得数据，更新数据
     syncdb_MysqlGetData() # 开放从mysql数据库获得数据，更新数据
-
+    
