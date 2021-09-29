@@ -170,10 +170,10 @@ def syncdb_MysqlGetData():
     """
     # [['奉贤校区', 1, 1], ['徐汇校区', 1, 1], ['金山校区', 1, 1]]
     items = getMysqlData('select * from classroom_campus') 
-    items = set([i[0] for i in items]) 
+    items = [i[0] for i in items]     
     # 下面两条语句，确保校区名称是最新的
     [i.delete() for i in Campus.objects.all() if i.name not in items]  
-    items = items - set(Campus.objects.all().values_list('name', flat=True))  
+    items = list_sub(items,list(Campus.objects.all().values_list('name', flat=True)))  
     items = [Campus(name=i) for i in items]
     Campus.objects.bulk_create(items, batch_size=20)    
     
@@ -190,9 +190,9 @@ def syncdb_MysqlGetData():
     11 rows in set (0.00 sec)    
     """
     items = getMysqlData('select * from classroom_classroomtype')
-    items = set([i[0] for i in items]) 
+    items = [i[0] for i in items]  
     [i.delete() for i in ClassroomType.objects.all() if i.name not in items]  
-    items = items - set(ClassroomType.objects.all().values_list('name', flat=True))  
+    items = list_sub(items,list(ClassroomType.objects.all().values_list('name', flat=True)))   
     items = [ClassroomType(name=i) for i in items]
     ClassroomType.objects.bulk_create(items, batch_size=20)    
 
@@ -230,9 +230,9 @@ def syncdb_MysqlGetData():
     994 rows in set (0.00 sec)    
     """
     items = getMysqlData('select * from classroom_teacher') # [['S0032', '杨薇'],...]]
-    items = set((i[0], i[1]) for i in items)
+    items = [(i[0], i[1]) for i in items]
     [i.delete() for i in Teacher.objects.all() if (i.id, i.name) not in items]
-    items = items - set(Teacher.objects.all().values_list('id', 'name'))
+    items = list_sub(items,list(Teacher.objects.all().values_list('id', 'name')))  
     items = [Teacher(id=i[0], name=i[1]) for i in items]
     Teacher.objects.bulk_create(items, batch_size=20)
 
@@ -250,8 +250,8 @@ def syncdb_MysqlGetData():
     """
     #[['2018-2019-1', datetime.date(2018, 9, 1)], datetime.date(2019, 01, 15)]]
     items = getMysqlData('select * from classroom_term') 
-    items = set(i[0] for i in items)
-    items = items - set(Term.objects.all().values_list('name', flat=True))
+    items = [i[0] for i in items]
+    items = list_sub(items,list(Term.objects.all().values_list('name', flat=True)))  
     today = datetime.date.today()
     items = [Term(name=i, firstMonday=today, start=today, end=today) for i in items] 
     Term.objects.bulk_create(items, batch_size=20)
