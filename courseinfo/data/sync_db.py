@@ -12,11 +12,7 @@ def list_sub(list1,list2):
     list2 = [[3, 4],[7, 8]]
     return： [[5, 6], [1, 2]]
     """
-    mylist = []
-    for i in list1:
-        if i not in  list2 :
-            mylist .append(i) 
-    return mylist 
+    return  [i for i in list1 if i not in list2] 
 
 # Oracle
 def getData(sql):
